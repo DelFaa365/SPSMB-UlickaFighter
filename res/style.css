@@ -1,0 +1,117 @@
+
+
+
+
+* {
+    box-sizing: border-box;
+    overflow: scroll;
+}
+
+body {
+    height: 100%;
+}
+
+
+
+
+.page {
+    position: absolute;
+    width: 100vw;
+    height: 100vw;
+    padding: 1rem;
+    text-align: center;
+    display: none;
+}
+
+table {
+}
+
+.boxes {
+    margin: 0 auto;
+    display: none;
+    color: black;
+    border-radius: 1.5rem;
+    width: fit-content;
+    padding: 3rem;
+    height: auto;
+    max-height: 40rem;
+    background-color: rgba(240, 240, 240, 0.693);
+}
+
+
+#start_game {
+    width: 100vw;
+    height: 100%;
+    background-image: url(/res/imgs/room.jpg);
+    background-size: cover;
+    text-align: center;
+}
+
+#doors {
+    position: absolute;
+    left: -18%;
+    bottom: 1rem;
+    width: 35rem;
+}
+
+.tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+
+#doors:hover .tooltiptext {
+    visibility: visible;
+}
+
+.home__options {
+    position: absolute;
+    left: 0;
+}
+
+
+.arrow {
+    position:absolute;
+    height:35px;
+    left: 0;
+    transform:translate(0%,-50%);
+    display: none;
+    width:auto;
+    height: auto;
+    font-size: 50px;
+    color: white;
+    border-radius:50%;
+}
+
+.right {
+    transform: rotate(180deg);
+}
+
+
+
+#action-left {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    width: 5rem;
+
+}
+
+
+
+#action-right {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    right: 0%;
+    width: 5rem;
+
+}
