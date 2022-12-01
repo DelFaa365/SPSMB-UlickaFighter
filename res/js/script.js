@@ -158,25 +158,26 @@ function typewriter() {
     })
 })
 
-let arrow = document.getElementById("arrow");
+let arrow = document.getElementsByClassName("arrow");
 const onMouseMove = (e) => {
-  arrow.style.left = e.pageX + "px";
-  arrow.style.top = e.pageY + "px";
+  [...arrow].forEach(element => {
+    element.style.left = e.pageX + "px";
+    element.style.top = e.pageY + "px";
+  });
 };
 document.addEventListener("mousemove", onMouseMove);
 
 const showArrow = (boolean) => {
-  if (arrow.style.display == "block") {
-    arrow.style.display = "none";
-  } else {
-    arrow.style.display = "block";
-  }
+  [...arrow].forEach(element => {
+    if (element.style.display == "block") {
+      element.style.display = "none";
+    } else {
+      element.style.display = "block";
+    }
+  })
   console.log(boolean);
 };
 
-const changeDeg = () => {
-  arrow.addClass(".right");
-};
 
 actionRight.addEventListener("mouseover", function () {
   showArrow(true);
