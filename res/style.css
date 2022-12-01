@@ -1,117 +1,179 @@
-
-
-
-
 * {
-    box-sizing: border-box;
-    overflow: scroll;
+  overflow: hidden;
 }
 
 body {
-    height: 100%;
+  height: 100%;
 }
-
-
-
 
 .page {
-    position: absolute;
-    width: 100vw;
-    height: 100vw;
-    padding: 1rem;
-    text-align: center;
-    display: none;
-}
-
-table {
+  position: absolute;
+  width: 100%;
+  height: 100vw;
+  padding: 1rem;
+  text-align: center;
+  display: none;
 }
 
 .boxes {
-    margin: 0 auto;
-    display: none;
-    color: black;
-    border-radius: 1.5rem;
-    width: fit-content;
-    padding: 3rem;
-    height: auto;
-    max-height: 40rem;
-    background-color: rgba(240, 240, 240, 0.693);
+  margin: 0 auto;
+  display: none;
+  color: black;
+  border-radius: 1.5rem;
+  width: fit-content;
+  padding: 3rem;
+  height: auto;
+  max-height: 40rem;
+  background-color: rgba(240, 240, 240, 0.693);
 }
 
-
 #start_game {
-    width: 100vw;
-    height: 100%;
-    background-image: url(/res/imgs/room.jpg);
-    background-size: cover;
-    text-align: center;
+  width: 100%;
+  height: 100%;
+  background-image: url(/res/imgs/room.jpg);
+  background-size: cover;
+  text-align: center;
 }
 
 #doors {
-    position: absolute;
-    left: -18%;
-    bottom: 1rem;
-    width: 35rem;
+  position: absolute;
+  left: -18%;
+  bottom: 1rem;
+  width: 35rem;
 }
 
 .tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-  
-    /* Position the tooltip */
-    position: absolute;
-    z-index: 1;
-  }
+  visibility: hidden;
+  width: 5rem;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
 
 #doors:hover .tooltiptext {
-    visibility: visible;
+  visibility: visible;
 }
 
 .home__options {
-    position: absolute;
-    left: 0;
+  width: 100%;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: row;
+  justify-content: space-around;
+  position: absolute;
+  left: 0;
 }
 
+#postava {
+  position: absolute;
+  bottom: 0%;
+  left: 5%;
+  width: 20rem;
+}
+
+#storyTime {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  background-color: black;
+}
+
+#storyTime__text {
+  font-family: monospace;
+  color: white;
+  height: 100%;
+  font-size: 30px;
+}
 
 .arrow {
-    position:absolute;
-    height:35px;
-    left: 0;
-    transform:translate(0%,-50%);
-    display: none;
-    width:auto;
-    height: auto;
-    font-size: 50px;
-    color: white;
-    border-radius:50%;
+  position: absolute;
+  height: 35px;
+  left: 0;
+  transform: translate(0%, -50%);
+  display: none;
+  width: auto;
+  height: auto;
+  font-size: 50px;
+  color: white;
+  border-radius: 50%;
 }
 
 .right {
-    transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
-
+#action-left,
+#action-right {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  background-color: transparent;
+  border: 1px solid rgba(192, 192, 192, 0.281);
+  width: 5rem;
+}
 
 #action-left {
-    position: absolute;
-    height: 100%;
-    top: 0;
-    width: 5rem;
-
+    left: 0%;
 }
-
-
 
 #action-right {
-    position: absolute;
-    height: 100%;
-    top: 0;
-    right: 0%;
-    width: 5rem;
-
+  top: 0;
+  right: 0%;
 }
+
+
+
+#goOut {
+    width: 100%;
+    height: 100%;
+}
+
+
+#enemy {
+    width: 23%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 20rem;
+    bottom: 0%;
+    right: 2%;
+    position: absolute;
+}
+
+.onMobile {
+    display: none;
+}
+
+@media all and (max-width: 1012px) {
+    .onMobile {
+        display: flex;
+
+        /*this centers the text horizontally*/
+        justify-content: center;
+      
+        /*this centers the text vertically*/
+        align-items: center;
+        position: absolute;
+        height: 100%;
+        width: 100vw;
+        background-color: black;
+        color: red;
+        text-align: center;
+        z-index: 1;
+        font-family: 'Raleway', sans-serif;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+}
+
+
+
+
+
+
+
