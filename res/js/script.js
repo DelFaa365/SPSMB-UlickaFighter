@@ -1,12 +1,50 @@
 const button = document.getElementsByTagName("button");
 const section = document.getElementsByTagName("section");
+const checkboxes = document.getElementsByTagName("checkbox");
 const boxes = document.getElementsByClassName("boxes");
 const actionRight = document.getElementById("action-right");
 const actionLight = document.getElementById("action-left");
 const story = document.getElementById("storyTime");
 
-
+let enemyAttack;
 let player = false;
+
+const savePlayer = () => {
+  localStorage.setItem("savePlayer", JSON.stringify(player));
+}
+
+const deletePlayer = () => {
+localStorage.removeItem("savePlayer");
+}
+
+const loadPlayer = () => {
+  data = JSON.parse(localStorage.getItem("savePlayer"));
+  return data;
+}
+
+const Init = () => {
+  player = loadPlayer();
+
+  if(!player){
+      player = {
+          location: false,
+          isNew: true,
+          dmg: 5,
+          cash: 0,
+          hp: 10,
+          hpMultiple: 1,
+          protein: false, 
+          tren: false,
+          upgrades: {}, 
+          charactersOwned: {},
+          characterEquiped: 0,
+          options: {
+            music__option: true,
+            save__option: true
+          }
+      }
+  }
+}
 
 let aText = new Array(
   "Vítej,",
@@ -71,11 +109,14 @@ function typewriter() {
             element.style.display = "none";
             if (element.dataset.index == index) {
               element.style.display = "block";
+              player.location = element.dataset.index
             }
           });
           if(element.dataset.index == "goOut"){
             spawnEnemy();
             console.log("spawnuju");
+            }else {
+              clearInterval(enemyAttack);
             }
         } else {
           [...section].forEach((element) => {
@@ -91,8 +132,36 @@ function typewriter() {
           });
         }
       };
+  } else if("main_menu_new"){
+    element.onclick = () => {
+        [...section].forEach((element) => {
+          if (element.dataset.index == "start_game") {
+            story.style.display = "block";
+            typewriter();
+            deletePlayer();
+            Init();
+            setTimeout(() => {
+              story.style.display = "none";
+              element.style.display = "block";
+              
+              player.isNew = false;
+            }, 15000);
+          }
+        });
+    };
   }
 });
+
+[...checkboxes].forEach((element) => {
+    let indexing = element;
+    player.options.forEach(element =>{
+      console.log(indexing + " " + element)
+      if(element == indexing.id){
+        element = indexing.checked;
+        console.log(indexing.checked)
+      }
+    })
+})
 
 let arrow = document.getElementById("arrow");
 const onMouseMove = (e) => {
@@ -127,74 +196,54 @@ actionLight.addEventListener("mouseout", function () {
   showArrow(false);
 });
 
-const savePlayer = () => {
-    localStorage.setItem("savePlayer", JSON.stringify(player));
-}
-
-const loadPlayer = () => {
-    data = JSON.parse(localStorage.getItem("savePlayer"));
-    return data;
-}
-
-const Init = () => {
-    player = loadPlayer();
-
-    if(!player){
-        player = {
-            isNew: true,
-            hp: 10,
-            dmg: 5,
-            cash: 0,
-            hpMultiple: 1,
-            protein: false, 
-            tren: false,
-            upgrades: {}, 
-            charactersOwned: {},
-            characterEquiped: 0,
-        }
-    }
-}
 
 window.addEventListener("load", Init);
 
 
 const enemyBox = document.getElementById("enemy");
-
+const attackBtn = document.getElementById("attack");
 const spawnEnemy = () => {
     let enemies = [
         [{
             hp: 20*player.hpMultiple,
             name: "Ulrych",
+            dmg: 1,
             img: "/res/imgs/characters/zatimneco.png"
         }],
         [{
-            hp: 150*player.hpMultiple,
+            hp: 20*player.hpMultiple,
             name: "Evinátor",
+            dmg: 1,
             img: "/res/imgs/characters/zatimneco.png"
         }],
         [{
             hp: 150*player.hpMultiple,
             name: "Štepíča",
+            dmg: 1,
             img: "/res/imgs/characters/zatimneco.png"
         }],
         [{
             hp: 150*player.hpMultiple,
             name: "Velkej Negr",
+            dmg: 1,
             img: "/res/imgs/characters/zatimneco.png"
         }],
         [{
             hp: 150*player.hpMultiple,
             name: "Mistr Alkoholik",
+            dmg: 1,
             img: "/res/imgs/characters/zatimneco.png"
         }],
         [{
             hp: 150*player.hpMultiple,
             name: "Majstr Hudyny",
+            dmg: 1,
             img: "/res/imgs/characters/zatimneco.png"
         }],
         [{
             hp: 150*player.hpMultiple,
             name: "Majstr Hojnej",
+            dmg: 1,
             img: "/res/imgs/characters/zatimneco.png"
         }]
     ];
@@ -209,26 +258,53 @@ const spawnEnemy = () => {
         });
     });
 
+    let random = Math.floor(Math.random() * avaliableEnemies);
+
     enemies.forEach((element, index) => {
         [...element].forEach(element => {
-            let random = Math.floor(Math.random() * avaliableEnemies);
-            console.log(avaliableEnemies);
-            console.log(random + " " + index);
             if(random == index){
+              
                 enemyBox.style.backgroundImage = "url(" + element.img + ")";
                 enemyBox.innerHTML = element.name;
+                  attackBtn.onclick = () => {
+                    if(element.hp <= 0){
+                      spawnEnemy();
+                      playerWins();
+                      console.log("spawnuju nový")
+                      return
+                    } else if(player.hp == 0 && element.hp > 0){
+                      console.log("Hráč umřel")
+                      return
+                    }
+                    element.hp -= player.dmg;
+                    console.log("Já dáávm damage" + element.hp)
+                  }
+
+                  if(player.location == "goOut"){
+                    enemyAttack = setInterval(() => {
+                      if(element.hp <= 0){
+                        return
+                      } else if(player.hp == 0 && element.hp > 0){
+                        console.log("Hráč umřel")
+                        return
+                      } else {
+                        player.hp -= element.dmg;
+                        console.log("Dávám damage" + player.hp);
+                      }
+                    }, 2000);
+                  }
             }
         });
     });
 
 
-}
-const attackBtn = document.getElementById("attack");
 
-attackBtn.onclick = () => {
-    // doděláme 
 }
 
+const playerWins = () => {
+  player.hpMultiple += 0.4;
+  console.log(player.hp + " " + player.hpMultiple);
+}
 
 
 

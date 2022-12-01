@@ -24,7 +24,12 @@
             <table id="mainmenu_controls">
                 <p>
                     <button class="btn btn-primary" id="main_menu" data-index="start_game">
-                        Start Game
+                        Pokračovat
+                    </button>
+                </p>
+                <p>
+                    <button class="btn btn-primary" id="main_menu_new" data-index="start_game">
+                        Nová hra
                     </button>
                 </p>
                 <p>
@@ -113,14 +118,27 @@
             </div>
         </section>
         <section id="options" class="page" data-index="options" style="display: none">
-            <button class="btn btn-primary" id="back_to_main_menu" data-index="mainmenu">
+            <button class="btn btn-primary" id="main_menu" data-index="mainmenu">
                 <i class="fa-solid fa-backward"></i>
             </button>
+            <div class="container-fluid" >
+                <div class="row" style="display:flex; flex-direction:column;">
+                    <div class="col" >
+                        <input type="checkbox" name="saving" id="save__option">
+                        <label for="saving">Ukládání</label>
+                    </div>
+                    <div class="col">
+                        <input type="checkbox" name="music" id="music__option">
+                        <label for="saving">Hudba</label>
+                    </div>
+                </div>
+            </div>
         </section>
         <section id="info" class="page" data-index="info" style="display: none">
-            <button class="btn btn-primary" id="back_to_main_menu" data-index="mainmenu">
+            <button class="btn btn-primary" id="main_menu" data-index="mainmenu">
                 <i class="fa-solid fa-backward"></i>
             </button>
+            
         </section>
 
         <section id="goOut" class="page" data-index="goOut">
