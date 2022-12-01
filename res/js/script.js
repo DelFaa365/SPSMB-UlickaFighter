@@ -150,7 +150,7 @@ const Init = () => {
             tren: false,
             upgrades: {}, 
             charactersOwned: {},
-            characterEquped: 0,
+            characterEquiped: 0,
         }
     }
 }
@@ -201,7 +201,7 @@ const spawnEnemy = () => {
 
     let avaliableEnemies = 0;
 
-    enemies.forEach((element, index) => {
+    enemies.forEach((element) => {
         [...element].forEach(element => {
             if(player.hp+30 >= element.hp){
                 avaliableEnemies++;
