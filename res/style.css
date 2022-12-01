@@ -1,5 +1,7 @@
 * {
   overflow: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -7,13 +9,40 @@ body {
 }
 
 .page {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  padding: 1rem;
-  text-align: center;
+  width: 100vw;
+  height: 100vw;
   display: none;
 }
+
+
+.mainmenu_controls {
+  height: 100%;
+}
+
+li {
+  margin: 2rem;
+}
+button{
+  padding: 0.4rem;
+  list-style: none;
+  font-weight: 600;
+  font-size: 30px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+}
+
+
+
+button:hover {
+  background: #fec771;
+  visibility: visible;
+  -webkit-transform: scaleX(1);
+  -moz-transform: scaleX(1);
+  -ms-transform: scaleX(1);
+  -o-transform: scaleX(1);
+  transform: scaleX(1);
+}
+
 
 .boxes {
   margin: 0 auto;
@@ -28,10 +57,7 @@ body {
 }
 
 #start_game {
-  width: 100%;
-  height: 100%;
   background-image: url(/res/imgs/room.jpg);
-  background-size: cover;
   text-align: center;
 }
 
@@ -70,16 +96,9 @@ body {
   left: 0;
 }
 
-#postava {
-  position: absolute;
-  bottom: 0%;
-  left: 5%;
-  width: 20rem;
-}
-
 #storyTime {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vw;
   margin: auto;
   background-color: black;
 }
@@ -88,6 +107,7 @@ body {
   font-family: monospace;
   color: white;
   height: 100%;
+  text-align: center;
   font-size: 30px;
 }
 
@@ -119,7 +139,7 @@ body {
 }
 
 #action-left {
-    left: 0%;
+  left: 0%;
 }
 
 #action-right {
@@ -130,45 +150,85 @@ body {
 
 
 #goOut {
-    width: 100%;
-    height: 100%;
+  background: url(/res/imgs/outside.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#goHomeGym {
+  background: url(/res/imgs/homeGym.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+
+
+.postava {
+  width: 15%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 20rem;
+  bottom: 0%;
+  left: 8%;
+  position: absolute;
+}
+
+#postavaFight {
+  width: 15%;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  height: 20rem;
+  bottom: 0%;
+  left: 8%;
+  position: absolute;
 }
 
 
 #enemy {
-    width: 23%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 20rem;
-    bottom: 0%;
-    right: 2%;
-    position: absolute;
+  width: 15%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 20rem;
+  bottom: 0%;
+  right: 8%;
+  position: absolute;
+}
+
+#mainmenu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .onMobile {
-    display: none;
+  display: none;
 }
 
 @media all and (max-width: 1012px) {
-    .onMobile {
-        display: flex;
+  .onMobile {
+    display: flex;
 
-        /*this centers the text horizontally*/
-        justify-content: center;
-      
-        /*this centers the text vertically*/
-        align-items: center;
-        position: absolute;
-        height: 100%;
-        width: 100vw;
-        background-color: black;
-        color: red;
-        text-align: center;
-        z-index: 1;
-        font-family: 'Raleway', sans-serif;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-    }
+    /*this centers the text horizontally*/
+    justify-content: center;
+
+    /*this centers the text vertically*/
+    align-items: center;
+    position: absolute;
+    height: 100%;
+    width: 100vw;
+    background-color: black;
+    color: red;
+    text-align: center;
+    z-index: 1;
+    font-family: 'Raleway', sans-serif;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
 }
 
 .container-fluid {
@@ -184,3 +244,8 @@ body {
 
 
 
+progress {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}

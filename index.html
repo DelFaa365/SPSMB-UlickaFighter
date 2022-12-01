@@ -21,28 +21,28 @@
         <section id="mainmenu" class="page" data-index="mainmenu" style="display: block">
             <h1>Vítej v nevm v čem</h1>
 
-            <table id="mainmenu_controls">
-                <p>
-                    <button class="btn btn-primary" id="main_menu" data-index="start_game">
+            <ul class="mainmenu_controls">
+                <li>
+                    <button  id="main_menu" data-index="start_game">
                         Pokračovat
                     </button>
-                </p>
-                <p>
-                    <button class="btn btn-primary" id="main_menu_new" data-index="start_game">
+                </li>
+                <li>
+                    <button  id="main_menu_new" data-index="start_game">
                         Nová hra
                     </button>
-                </p>
-                <p>
-                    <button class="btn btn-primary" id="main_menu" data-index="options">
+                </li>
+                <li>
+                    <button  id="main_menu" data-index="options">
                         Options
                     </button>
-                </p>
-                <p>
-                    <button class="btn btn-primary" id="main_menu" data-index="info">
+                </li>
+                <li>
+                    <button class=" " id="main_menu" data-index="info">
                         Info
                     </button>
-                </p>
-            </table>
+                </li>
+            </ul>
         </section>
 
         <section class="page" id="storyTime">
@@ -82,7 +82,6 @@
             </div>
 
             <div class="postava">
-                <img src="/res/imgs/characters/zatimneco.png" alt="HonzíkTillucozjeslaby" id="postava" />
             </div>
 
             <div class="boxes" data-index="postava">
@@ -144,18 +143,25 @@
         <section id="goOut" class="page" data-index="goOut">
 
             <button id="action-left" data-index="start_game" ></button>
-            <button id="action-right" data-index="goHomeGym"></button>
+            <button id="action-right" data-index="n"></button>
             <div class="postava">
-                <img src="/res/imgs/characters/zatimneco.png" alt="HonzíkTillucozjeslaby" id="postava" />
+                <progress id="healthPlayer" value="100" max="100"></progress>
             </div>
             <div id="enemy">
+                <progress id="healthEnemy"></progress>
             </div>
             <button id="attack">
                 Attack
             </button>
             <canvas></canvas>
         </section>
-        <section id="goHomeGym" class="page" data-index="goHomeGym""></section>
+        <section id="goHomeGym" class="page" data-index="goHomeGym"">
+            <button id="action-left" data-index="start_game" ></button>
+            <button id="action-right" data-index="n"></button>
+
+            <div class="postava">
+            </div>
+        </section>
     </div>
 
     <script src="res/js/script.js"></script>

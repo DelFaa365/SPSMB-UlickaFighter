@@ -5,6 +5,7 @@ const boxes = document.getElementsByClassName("boxes");
 const actionRight = document.getElementById("action-right");
 const actionLight = document.getElementById("action-left");
 const story = document.getElementById("storyTime");
+const postava = document.getElementsByClassName("postava");
 
 let enemyAttack;
 let player = false;
@@ -32,18 +33,23 @@ const Init = () => {
           dmg: 5,
           cash: 0,
           hp: 10,
+          maxHp: 10,
           hpMultiple: 1,
           protein: false, 
           tren: false,
           upgrades: {}, 
           charactersOwned: {},
-          characterEquiped: 0,
+          characterEquiped: "/res/imgs/characters/zatimneco.png",
           options: {
             music__option: true,
             save__option: true
           }
       }
   }
+  setHealthBar(true, player.maxHp);
+  [...postava].forEach(element => {
+    element.style.backgroundImage = "url(" + player.characterEquiped + ")";
+  });
 }
 
 let aText = new Array(
@@ -114,36 +120,25 @@ function typewriter() {
           });
           if(element.dataset.index == "goOut"){
             spawnEnemy();
+            changeHealthBar(true, player.hp);
             console.log("spawnuju");
             }else {
               clearInterval(enemyAttack);
             }
-        } else {
-          [...section].forEach((element) => {
-            if (element.dataset.index == "start_game") {
-              story.style.display = "block";
-              typewriter();
-              setTimeout(() => {
-                story.style.display = "none";
-                element.style.display = "block";
-                player.isNew = false;
-              }, 15000);
-            }
-          });
         }
       };
-  } else if("main_menu_new"){
+  } else if(element.id == "main_menu_new"){
     element.onclick = () => {
         [...section].forEach((element) => {
+          element.style.display = "none";
+          typewriter();
+          deletePlayer();
+          Init();
           if (element.dataset.index == "start_game") {
             story.style.display = "block";
-            typewriter();
-            deletePlayer();
-            Init();
             setTimeout(() => {
               story.style.display = "none";
               element.style.display = "block";
-              
               player.isNew = false;
             }, 15000);
           }
@@ -201,7 +196,7 @@ window.addEventListener("load", Init);
 
 
 const enemyBox = document.getElementById("enemy");
-const attackBtn = document.getElementById("attack");
+const attackBtn = document.getElementById("attack");;
 const spawnEnemy = () => {
     let enemies = [
         [{
@@ -249,7 +244,6 @@ const spawnEnemy = () => {
     ];
 
     let avaliableEnemies = 0;
-
     enemies.forEach((element) => {
         [...element].forEach(element => {
             if(player.hp+30 >= element.hp){
@@ -263,11 +257,9 @@ const spawnEnemy = () => {
     enemies.forEach((element, index) => {
         [...element].forEach(element => {
             if(random == index){
-
                 element.hp = Math.floor(element.hp);
-              
                 enemyBox.style.backgroundImage = "url(" + element.img + ")";
-                enemyBox.innerHTML = element.name;
+                setHealthBar(false, element.hp)
                   attackBtn.onclick = () => {
                     if(element.hp <= 0){
                       spawnEnemy();
@@ -279,6 +271,7 @@ const spawnEnemy = () => {
                       return
                     }
                     element.hp -= player.dmg;
+                    changeHealthBar(false, element.hp);
                     console.log("Já dáávm damage" + element.hp)
                   }
 
@@ -291,6 +284,7 @@ const spawnEnemy = () => {
                         return
                       } else {
                         player.hp -= element.dmg;
+                        changeHealthBar(true, player.hp);
                         console.log("Dávám damage" + player.hp);
                       }
                     }, 2000);
@@ -298,16 +292,30 @@ const spawnEnemy = () => {
             }
         });
     });
-
-
-
 }
+
+const setHealthBar = (player, maxHp) => {
+  if(player){
+    document.getElementById("healthPlayer").value = maxHp;
+    document.getElementById("healthPlayer").max = maxHp;
+  } else {
+    document.getElementById("healthEnemy").value = maxHp;
+    document.getElementById("healthEnemy").max = maxHp;
+  }
+}
+
+const changeHealthBar = (player, hp) => {
+  if(player){
+    document.getElementById("healthPlayer").value = hp;
+  } else {
+    document.getElementById("healthEnemy").value = hp;
+  }
+}
+
 
 const playerWins = () => {
   player.hpMultiple += 0.4;
 }
-
-
 
 
 let save = setInterval(() => {
