@@ -2,11 +2,12 @@ const button = document.getElementsByTagName("button");
 const section = document.getElementsByTagName("section");
 const checkboxes = document.getElementsByTagName("checkbox");
 const boxes = document.getElementsByClassName("boxes");
-const actionRight = document.getElementById("action-right");
-const actionLight = document.getElementById("action-left");
+const actionRight = document.getElementsByClassName("action-right");
+const actionLight = document.getElementsByClassName("action-left");
 const story = document.getElementById("storyTime");
 const postava = document.getElementsByClassName("postava");
 
+mainaudio = new Audio('/res/sounds/main.mp3');
 let enemyAttack;
 let player = false;
 
@@ -50,6 +51,7 @@ const Init = () => {
   [...postava].forEach(element => {
     element.style.backgroundImage = "url(" + player.characterEquiped + ")";
   });
+  mainaudio.play();
 }
 
 let aText = new Array(
@@ -117,6 +119,11 @@ function typewriter() {
               element.style.display = "block";
               player.location = element.dataset.index
             }
+            if(element.id == "main_menu"){
+              mainaudio.play();
+            } else {
+              mainaudio.pause();
+            }
           });
           if(element.dataset.index == "goOut"){
             spawnEnemy();
@@ -173,25 +180,33 @@ const showArrow = (boolean) => {
       element.style.display = "none";
     } else {
       element.style.display = "block";
+      if(boolean){
+        element.style.transform ="rotate(180deg)";
+      } else {
+          element.style.transform ="rotate(0)";
+      }
     }
   })
-  console.log(boolean);
 };
 
 
-actionRight.addEventListener("mouseover", function () {
-  showArrow(true);
-});
-actionLight.addEventListener("mouseover", function () {
-  showArrow(false);
-});
-actionRight.addEventListener("mouseout", function () {
-  showArrow(true);
-});
-actionLight.addEventListener("mouseout", function () {
-  showArrow(false);
+[...actionLight].forEach(element => {
+  element.addEventListener("mouseover", function () {
+    showArrow(false);
+  });
+  element.addEventListener("mouseout", function () {
+    showArrow(false);
+  });
 });
 
+[...actionRight].forEach(element => {
+  element.addEventListener("mouseover", function () {
+    showArrow(true);
+  });
+  element.addEventListener("mouseout", function () {
+    showArrow(true);
+  });
+});
 
 window.addEventListener("load", Init);
 
@@ -204,7 +219,7 @@ const spawnEnemy = () => {
             hp: 20*player.hpMultiple,
             name: "Ulrych",
             dmg: 1,
-            img: "/res/imgs/characters/zatimneco.png"
+            img: "/res/imgs/characters/ulrychEnemy.png"
         }],
         [{
             hp: 20*player.hpMultiple,

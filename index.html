@@ -19,27 +19,27 @@
     </div>
     <div class="pages">
         <section id="mainmenu" class="page" data-index="mainmenu" style="display: block">
-            <h1>Vítej v nevm v čem</h1>
+            <h1>Ulička life simulátor</h1>
 
             <ul class="mainmenu_controls">
                 <li>
-                    <button  id="main_menu" data-index="start_game">
-                        Pokračovat
+                    <button id="main_menu" data-index="start_game">
+                        <span>CONTINUE </span>
                     </button>
                 </li>
                 <li>
-                    <button  id="main_menu_new" data-index="start_game">
-                        Nová hra
+                    <button id="main_menu_new" data-index="start_game">
+                        <span>NEW GAME</span>
                     </button>
                 </li>
                 <li>
-                    <button  id="main_menu" data-index="options">
-                        Options
+                    <button id="main_menu" data-index="options">
+                        <span>Options</span>
                     </button>
                 </li>
                 <li>
                     <button class=" " id="main_menu" data-index="info">
-                        Info
+                        <span>Info</span>
                     </button>
                 </li>
             </ul>
@@ -61,7 +61,7 @@
             <table id="option_controls" class="home__options">
                 <div class="tooltiptext">tooltiptext</div>
                 <button class="btn btn-primary" id="main_menu" data-index="mainmenu">
-                    <i class="fa-solid fa-backward"></i>
+                    <i class="fas fa-thumbs-up"></i>
                 </button>
                 <button class="btn btn-primary" id="game_menu" data-index="upgrade">
                     Upgrade
@@ -71,13 +71,59 @@
                 </button>
             </table>
 
-            <button id="action-left" data-index="goOut" ></button>
-            <button id="action-right" data-index="goHomeGym"></button>
+            <button class="action-left" id="action-left" data-index="goOut"></button>
+            <button class="action-right" id="action-right" data-index="goHomeGym"></button>
 
             <div class="boxes" data-index="upgrade">
                 <h1>Upgrades</h1>
-                <div class="text-area">
-                    <p>Ahojda</p>
+                <div class="cards">
+                    <div class="card">
+                        <div class="card-body">
+                            <img class="card-img-top"
+                                src="https://phoenixeliquid.co.uk/wp-content/uploads/2022/01/elf-bar-family.png"
+                                alt="Card image cap">
+                            <h5 class="card-title">Elf Bar</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Čistý dým na tvé plíce</h6>
+                            <p class="card-text">Zvýší tvojí aktivitu v gymu</p>
+                            <button data-index="elf_bar">Koupit</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <img class="card-img-top" src="https://www.vaporism.cz/picture/62b0c852ef405/w960/velo-arctic-frost-max-strong-20mg.png" alt="Card image cap">
+                            <h5 class="card-title">Velo</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Velos pod peros</h6>
+                            <p class="card-text">Zvýší tvojí aktivitu v gymu, ale pozor může se z tebe stát dealer nikotioných sáčků</p>
+                            <button data-index="elf_bar">Koupit</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <img class="card-img-top" src="https://www.extrifit.cz/uploads/eshop/product/middle/4122d7472d8aba7376b05239c7549401.png" alt="Card image cap">
+                            <h5 class="card-title">Protein</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Nikdy neuškodí</h6>
+                            <p class="card-text">Zvýší násobič v gymu</p>
+                            <button data-index="elf_bar">Koupit</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <img class="card-img-top" src="https://www.dafit.cz/userfiles/26b966d6-0237-4fb0-a78c-090711fb0d89.png" alt="Card image cap">
+                            <h5 class="card-title">Kreatin</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Základ, čistej základ</h6>
+                            <p class="card-text">Zvýší rychlost používání náčiní v gymu</p>
+                            <button data-index="elf_bar">Koupit</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <img class="card-img-top" src="https://pngimg.com/uploads/cigarette/cigarette_PNG4755.png" alt="Card image cap">
+                            <h5 class="card-title">Žváro</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Žváro od majsnera</h6>
+                            <p class="card-text">Rychlejší regenrace hp</p>
+                            <button data-index="elf_bar">Koupit</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -120,9 +166,9 @@
             <button class="btn btn-primary" id="main_menu" data-index="mainmenu">
                 <i class="fa-solid fa-backward"></i>
             </button>
-            <div class="container-fluid" >
+            <div class="container-fluid">
                 <div class="row" style="display:flex; flex-direction:column;">
-                    <div class="col" >
+                    <div class="col">
                         <input type="checkbox" name="saving" id="save__option">
                         <label for="saving">Ukládání</label>
                     </div>
@@ -137,32 +183,39 @@
             <button class="btn btn-primary" id="main_menu" data-index="mainmenu">
                 <i class="fa-solid fa-backward"></i>
             </button>
-            
+
         </section>
 
         <section id="goOut" class="page" data-index="goOut">
             <div class="arrow">&#8592;</div>
-            <button id="action-left" data-index="start_game" ></button>
-            <button id="action-right" data-index="n"></button>
-            <div class="postava">
-                <progress id="healthPlayer" value="100" max="100"></progress>
+            <button class="action-left" id="action-left" data-index="start_game"></button>
+            <button class="action-right" id="action-right" data-index="n"></button>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <div class="postava">
+                            <progress id="healthPlayer" value="100" max="100"></progress>
+                        </div>
+                        <div id="enemy">
+                            <progress id="healthEnemy"></progress>
+                        </div>
+                        <button id="attack">
+                            Attack
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div id="enemy">
-                <progress id="healthEnemy"></progress>
-            </div>
-            <button id="attack">
-                Attack
-            </button>
-            <canvas></canvas>
         </section>
         <section id="goHomeGym" class="page" data-index="goHomeGym"">
-            <div class="arrow">&#8592;</div>
-            <button id="action-left" data-index="start_game" ></button>
-            <button id="action-right" data-index="n"></button>
+            <div class=" arrow">&#8592;
+    </div>
+    <button class="action-left" id="action-left" data-index="start_game"></button>
+    <button class="action-right" id="action-right" data-index="n"></button>
 
-            <div class="postava">
-            </div>
-        </section>
+    <div class="postava">
+    </div>
+    </section>
     </div>
 
     <script src="res/js/script.js"></script>
