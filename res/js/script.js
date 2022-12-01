@@ -263,6 +263,8 @@ const spawnEnemy = () => {
     enemies.forEach((element, index) => {
         [...element].forEach(element => {
             if(random == index){
+
+                element.hp = Math.floor(element.hp);
               
                 enemyBox.style.backgroundImage = "url(" + element.img + ")";
                 enemyBox.innerHTML = element.name;
@@ -303,7 +305,6 @@ const spawnEnemy = () => {
 
 const playerWins = () => {
   player.hpMultiple += 0.4;
-  console.log(player.hp + " " + player.hpMultiple);
 }
 
 
