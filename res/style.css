@@ -140,6 +140,7 @@ li>button:hover span:after {
   width: 35rem;
 }
 
+
 .tooltiptext {
   visibility: hidden;
   width: 5rem;
@@ -184,7 +185,7 @@ li>button:hover span:after {
   position: absolute;
   height: 35px;
   left: 0;
-  transform: translate(0%, -50%);
+  transform: translate(20%, -20%);
   display: none;
   width: auto;
   height: auto;
@@ -198,10 +199,10 @@ li>button:hover span:after {
 }
 
 .action-left,
-.action-right {
+.action-right,
+.action-down {
   position: absolute;
   height: 100%;
-  top: 0;
   background-color: transparent;
   border: none;
   width: 5rem;
@@ -214,6 +215,13 @@ li>button:hover span:after {
 .action-right {
   top: 0;
   right: 0%;
+}
+
+.action-down {
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 5rem;
 }
 
 
@@ -245,6 +253,7 @@ li>button:hover span:after {
   bottom: 0%;
   left: 8%;
   position: absolute;
+  transition: ease-in 1s;
 }
 
 #postavaFight {
@@ -255,6 +264,7 @@ li>button:hover span:after {
   bottom: 0%;
   left: 8%;
   position: absolute;
+  transition:linear 1s;
 }
 
 
@@ -278,6 +288,7 @@ li>button:hover span:after {
   -o-background-size: cover;
   background-size: cover;
 }
+
 
 .onMobile {
   display: none;
@@ -305,6 +316,13 @@ li>button:hover span:after {
   }
 }
 
+#attack {
+  margin: 0 auto;
+}
+
+#endText {
+  display: none;
+}
 .container-fluid {
   display: flex;
   flex-direction: row;
