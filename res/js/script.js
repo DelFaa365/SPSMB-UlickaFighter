@@ -3,6 +3,7 @@ const section = document.getElementsByTagName("section");
 const checkboxes = document.getElementsByTagName("checkbox");
 const boxes = document.getElementsByClassName("boxes");
 const actionRight = document.getElementsByClassName("action-right");
+const actionDown = document.getElementsByClassName("action-down");
 const actionLight = document.getElementsByClassName("action-left");
 const story = document.getElementById("storyTime");
 const postava = document.getElementsByClassName("postava");
@@ -107,7 +108,7 @@ function typewriter() {
           });
         }
       };
-  } else if(element.id == "main_menu" || element.id == "action-left" || element.id == "action-right") {
+  } else if(element.id == "main_menu" || element.id == "action-left" || element.id == "action-right" || element.id == "action-down") {
     element.onclick = () => {
         if (player.isNew != true) {
           let index = element.dataset.index;
@@ -125,6 +126,7 @@ function typewriter() {
           });
           if(element.dataset.index == "goOut"){
             spawnEnemy();
+            playerDead(false);
             changeHealthBar(true, player.hp);
             console.log("spawnuju");
             }else {
@@ -178,10 +180,13 @@ const showArrow = (boolean) => {
       element.style.display = "none";
     } else {
       element.style.display = "block";
-      if(boolean){
+      if(boolean == 1){
         element.style.transform ="rotate(180deg)";
-      } else {
+      } else if(boolean == 2) {
           element.style.transform ="rotate(0)";
+      } else {
+        element.style.transform ="rotate(270deg)";
+        console.log("otacim neco?")
       }
     }
   })
@@ -190,19 +195,28 @@ const showArrow = (boolean) => {
 
 [...actionLight].forEach(element => {
   element.addEventListener("mouseover", function () {
-    showArrow(false);
+    showArrow(2);
   });
   element.addEventListener("mouseout", function () {
-    showArrow(false);
+    showArrow(2);
   });
 });
 
 [...actionRight].forEach(element => {
   element.addEventListener("mouseover", function () {
-    showArrow(true);
+    showArrow(1);
   });
   element.addEventListener("mouseout", function () {
-    showArrow(true);
+    showArrow(1);
+  });
+});
+
+[...actionDown].forEach(element => {
+  element.addEventListener("mouseover", function () {
+    showArrow(3);
+  });
+  element.addEventListener("mouseout", function () {
+    showArrow(3);
   });
 });
 
@@ -217,43 +231,50 @@ const spawnEnemy = () => {
             hp: 20*player.hpMultiple,
             name: "Ulrych",
             dmg: 1,
-            img: "/res/imgs/characters/ulrychEnemy.png"
+            img: "/res/imgs/characters/ulrychEnemy.png",
+            attackSpeed: 750
         }],
         [{
             hp: 20*player.hpMultiple,
             name: "Evinátor",
             dmg: 1,
-            img: "/res/imgs/characters/zatimneco.png"
+            img: "/res/imgs/characters/zatimneco.png",
+            attackSpeed: 1000
         }],
         [{
             hp: 150*player.hpMultiple,
             name: "Štepíča",
             dmg: 1,
-            img: "/res/imgs/characters/zatimneco.png"
+            img: "/res/imgs/characters/zatimneco.png",
+            attackSpeed: 1000
         }],
         [{
             hp: 150*player.hpMultiple,
             name: "Velkej Negr",
             dmg: 1,
-            img: "/res/imgs/characters/zatimneco.png"
+            img: "/res/imgs/characters/zatimneco.png",
+            attackSpeed: 1000
         }],
         [{
             hp: 150*player.hpMultiple,
             name: "Mistr Alkoholik",
             dmg: 1,
-            img: "/res/imgs/characters/zatimneco.png"
+            img: "/res/imgs/characters/zatimneco.png",
+            attackSpeed: 1000
         }],
         [{
             hp: 150*player.hpMultiple,
             name: "Majstr Hudyny",
             dmg: 1,
-            img: "/res/imgs/characters/zatimneco.png"
+            img: "/res/imgs/characters/zatimneco.png",
+            attackSpeed: 1000
         }],
         [{
             hp: 150*player.hpMultiple,
             name: "Majstr Hojnej",
             dmg: 1,
-            img: "/res/imgs/characters/zatimneco.png"
+            img: "/res/imgs/characters/zatimneco.png",
+            attackSpeed: 1000
         }]
     ];
 
@@ -277,16 +298,24 @@ const spawnEnemy = () => {
                   attackBtn.onclick = () => {
                     if(element.hp <= 0){
                       spawnEnemy();
+                      playerDead(false);
                       playerWins();
                       console.log("spawnuju nový")
                       return
                     } else if(player.hp == 0 && element.hp > 0){
+                      playerDead(true);
                       console.log("Hráč umřel")
                       return
                     }
                     element.hp -= player.dmg;
                     changeHealthBar(false, element.hp);
-                    console.log("Já dáávm damage" + element.hp)
+                    console.log("Já dáávm damage" + element.hp);
+                    [...postava].forEach(element => {
+                      element.style.left = "15%";
+                      setTimeout(() => {
+                        element.style.left = "8%";
+                      }, 500);
+                    });
                   }
 
                   if(player.location == "goOut"){
@@ -301,7 +330,7 @@ const spawnEnemy = () => {
                         changeHealthBar(true, player.hp);
                         console.log("Dávám damage" + player.hp);
                       }
-                    }, 2000);
+                    }, element.attackSpeed);
                   }
             }
         });
@@ -326,9 +355,30 @@ const changeHealthBar = (player, hp) => {
   }
 }
 
+const endText = document.getElementById("endText");
 
 const playerWins = () => {
   player.hpMultiple += 0.4;
+  player.cash += 10;
+  attackBtn.style.display = "none";
+  endText.style.display = "block"
+  endText.innerText = "Winner"
+  setTimeout(() => {
+    attackBtn.style.display = "block";
+    endText.style.display = "none"
+  }, 400);
+  
+}
+
+const playerDead = (dead) => {
+  if(dead) {
+    attackBtn.style.display = "none";
+    endText.style.display = "block"
+    endText.innerText = "Died"
+  } else {
+      attackBtn.style.display = "block";
+      endText.style.display = "none"
+  }
 }
 
 
