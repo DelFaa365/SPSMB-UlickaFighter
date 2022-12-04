@@ -5,6 +5,17 @@
   margin: 0;
   font-family: 'Press Start 2P', cursive;
   padding: 0;
+  animation: ripple 100ms linear;
+}
+
+@keyframes ripple {
+  from {
+    transform: scale(0.8);
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 ::-webkit-scrollbar {
@@ -191,6 +202,8 @@ li>button:hover span:after {
   font-size: 50px;
   color: white;
   border-radius: 50%;
+
+  animation: none;
 }
 
 .right {

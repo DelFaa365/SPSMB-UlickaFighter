@@ -36,8 +36,6 @@ const Init = () => {
           hp: 10,
           maxHp: 10,
           hpMultiple: 1,
-          protein: false, 
-          tren: false,
           upgrades: {}, 
           charactersOwned: {},
           characterEquiped: "/res/imgs/characters/zatimneco.png",
