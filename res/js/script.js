@@ -37,7 +37,7 @@ const Init = () => {
       hp: 10,
       maxHp: 10,
       hpMultiple: 1,
-      upgrades: {},
+      upgrades : {},
       charactersOwned: {},
       characterEquiped: "/res/imgs/characters/zatimneco.png",
       options: {
@@ -440,16 +440,39 @@ const startGym = () => {
 
 let upgrades = [
   [{
+    index: "velo",
     name: "Velo",
     subtitle: "Velos pod peros",
-    text: "Zvýší tvojí aktivitu v gymu, ale pozor může se z tebe stát dealer nikotioných sáčků",
-    img: "/res/imgs/characters/ulrychEnemy.png",
+    text: "Zvýší tvojí aktivitu v gymu, ale pozor může se z tebe stát dealer nikotinových sáčků",
+    img: "https://www.vaporism.cz/picture/62b0c852ef405/w960/velo-arctic-frost-max-strong-20mg.png",
   }],
   [{
+    index: "elfbar",
     name: "Elf Bar",
     subtitle: "Čistý dým na tvé plíce",
     text: "Zvýší tvojí aktivitu v gymu",
+    img: "https://phoenixeliquid.co.uk/wp-content/uploads/2022/01/elf-bar-family.png",
+  }],  
+  [{
+    index: "protein",
+    name: "Protein",
+    subtitle: "Nikdy neuškodí",
+    text: "Zvýší násobič v gymu",
     img: "/res/imgs/characters/ulrychEnemy.png",
+  }],
+  [{
+    index: "kreatin",
+    name: "Kreatin",
+    subtitle: "Základ, čistej základ",
+    text: "Zvýší rychlost používání náčiní v gymu",
+    img: "https://www.dafit.cz/userfiles/26b966d6-0237-4fb0-a78c-090711fb0d89.png",
+  }],  
+  [{
+    index: "zvaro",
+    name: "Žváro",
+    subtitle: "Žváro od majsnera",
+    text: "Rychlejší regenrace hp",
+    img: "https://pngimg.com/uploads/cigarette/cigarette_PNG4755.png",
   }],
 ];
 
@@ -463,37 +486,46 @@ const initUpgrades = () => {
       const card_subtitle = document.createElement("h6");
       const card_text = document.createElement("p");
       const button = document.createElement("button");
-  
-  
+
+
       card.classList.add("card");
       card_body.classList.add("card-body");
       img.classList.add("card-img-top");
       card_title.classList.add("card-title");
       card_subtitle.classList.add("card-subtitle");
-      card_title.classList.add("card_title");
       card_text.classList.add("card-text");
-      button.dataset.index = element.name;
-  
-  
+      button.dataset.index = element.index;
+      button.innerText = "Koupit";
+
+      img.src = element.img;
       card_title.innerText = element.name;
       card_subtitle.innerText = element.subtitle;
       card_text.innerText = element.text;
-  
-      
-      card_body.append(card);
+
+      card.append(card_body);
+      card.append(button);
+      card_body.append(img);
       card_body.append(card_title);
       card_body.append(card_subtitle);
       card_body.append(card_text);
-      button.append(card);
-      ocument.getElementById("upgrades").append(card)
-  
-      console.log("dávám" + element.name)
+      document.getElementById("upgrades").append(card)
+
     });
   });
 }
 
 initUpgrades();
 
-const buyUpgrade = (id) => {
 
+const buyUpgrade = (id) => {
+  console.log(player.upgrades);
+  let loop = player.upgrades;
+  [...loop].forEach(element => {
+    
+  });
+}
+
+
+const fetchUpgrades = () => {
+  
 }
