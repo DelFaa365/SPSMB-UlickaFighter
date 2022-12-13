@@ -454,37 +454,45 @@ let upgrades = [
 ];
 
 const initUpgrades = () => {
-  upgrades.forEach(element => {
-    const card = document.createElement("div");
-    const card_body = document.createElement("div");
-    const img = document.createElement("img");
-    const card_title = document.createElement("h5");
-    const card_subtitle = document.createElement("h6");
-    const card_text = document.createElement("p");
-    const button = document.createElement("button");
-
-
-    card.classList.add("card");
-    card_body.classList.add("card-body");
-    img.classList.add("card-img-top");
-    card_title.classList.add("card-title");
-    card_subtitle.classList.add("card-subtitle");
-    card_title.classList.add("card_title");
-    card_text.classList.add("card-text");
-    button.dataset.index = element.name;
-
-    card.card_title = element.name;
-
-    card.appendChild(document.getElementById("cards"));
-    card_body.appendChild(card);
-    img.appendChild(card_body);
-    card_title.appendChild(card_body);
-    card_subtitle.appendChild(card_body);
-    card_text.appendChild(card_body);
-    button.appendChild(card);
-
+  upgrades.forEach((element, index) => {
+    [...element].forEach(element => {
+      const card = document.createElement("div");
+      const card_body = document.createElement("div");
+      const img = document.createElement("img");
+      const card_title = document.createElement("h5");
+      const card_subtitle = document.createElement("h6");
+      const card_text = document.createElement("p");
+      const button = document.createElement("button");
+  
+  
+      card.classList.add("card");
+      card_body.classList.add("card-body");
+      img.classList.add("card-img-top");
+      card_title.classList.add("card-title");
+      card_subtitle.classList.add("card-subtitle");
+      card_title.classList.add("card_title");
+      card_text.classList.add("card-text");
+      button.dataset.index = element.name;
+  
+  
+      card_title.innerText = element.name;
+      card_subtitle.innerText = element.subtitle;
+      card_text.innerText = element.text;
+  
+      
+      card_body.append(card);
+      card_body.append(card_title);
+      card_body.append(card_subtitle);
+      card_body.append(card_text);
+      button.append(card);
+      ocument.getElementById("upgrades").append(card)
+  
+      console.log("dávám" + element.name)
+    });
   });
 }
+
+initUpgrades();
 
 const buyUpgrade = (id) => {
 
