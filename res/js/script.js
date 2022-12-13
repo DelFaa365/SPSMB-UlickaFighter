@@ -238,7 +238,14 @@ const spawnEnemy = () => {
       hp: 20 * player.hpMultiple,
       name: "Evinátor",
       dmg: 1,
-      img: "/res/imgs/characters/zatimneco.png",
+      img: "/res/imgs/characters/eva.png",
+      attackSpeed: 1000
+    }],
+    [{
+      hp: 20 * player.hpMultiple,
+      name: "Erbi",
+      dmg: 1,
+      img: "/res/imgs/characters/erbi.png",
       attackSpeed: 1000
     }],
     [{
@@ -423,10 +430,62 @@ const startGym = () => {
     }
   }
   gymInt = setInterval(() => {
-    if(gymProg >= 0){
+    if (gymProg >= 0) {
       gymProg -= player.dmg * player.hpMultiple;
       gymProgBar.value = gymProg;
       console.log("dávám dolu?")
     }
   }, 200);
+}
+
+let upgrades = [
+  [{
+    name: "Velo",
+    subtitle: "Velos pod peros",
+    text: "Zvýší tvojí aktivitu v gymu, ale pozor může se z tebe stát dealer nikotioných sáčků",
+    img: "/res/imgs/characters/ulrychEnemy.png",
+  }],
+  [{
+    name: "Elf Bar",
+    subtitle: "Čistý dým na tvé plíce",
+    text: "Zvýší tvojí aktivitu v gymu",
+    img: "/res/imgs/characters/ulrychEnemy.png",
+  }],
+];
+
+const initUpgrades = () => {
+  upgrades.forEach(element => {
+    const card = document.createElement("div");
+    const card_body = document.createElement("div");
+    const img = document.createElement("img");
+    const card_title = document.createElement("h5");
+    const card_subtitle = document.createElement("h6");
+    const card_text = document.createElement("p");
+    const button = document.createElement("button");
+
+
+    card.classList.add("card");
+    card_body.classList.add("card-body");
+    img.classList.add("card-img-top");
+    card_title.classList.add("card-title");
+    card_subtitle.classList.add("card-subtitle");
+    card_title.classList.add("card_title");
+    card_text.classList.add("card-text");
+    button.dataset.index = element.name;
+
+    card.card_title = element.name;
+
+    card.appendChild(document.getElementById("cards"));
+    card_body.appendChild(card);
+    img.appendChild(card_body);
+    card_title.appendChild(card_body);
+    card_subtitle.appendChild(card_body);
+    card_text.appendChild(card_body);
+    button.appendChild(card);
+
+  });
+}
+
+const buyUpgrade = (id) => {
+
 }
