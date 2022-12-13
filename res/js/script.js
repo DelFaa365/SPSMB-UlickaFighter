@@ -8,6 +8,14 @@ const actionLight = document.getElementsByClassName("action-left");
 const story = document.getElementById("storyTime");
 const postava = document.getElementsByClassName("postava");
 
+
+let debugBoolean = true;
+const debug = (text) => {
+  if(debugBoolean){
+    console.log(text)
+  }
+}
+
 mainaudio = new Audio('/res/sounds/main.mp3');
 let enemyAttack;
 let player = false;
@@ -95,7 +103,7 @@ function typewriter() {
       if (player.isNew != true) {
         let index = element.dataset.index;
         [...boxes].forEach((element) => {
-          console.log(index + " " + element.dataset.index)
+          debug(index + " " + element.dataset.index)
           if (element.dataset.index == index) {
             if (element.style.display == "block") {
               element.style.display = "none";
@@ -128,7 +136,7 @@ function typewriter() {
           spawnEnemy();
           playerDead(false);
           changeHealthBar(true, player.hp);
-          console.log("spawnuju");
+          debug("spawnuju");
         } else {
           clearInterval(enemyAttack);
         }
@@ -157,10 +165,10 @@ function typewriter() {
 [...checkboxes].forEach((element) => {
   let indexing = element;
   player.options.forEach(element => {
-    console.log(indexing + " " + element)
+    debug(indexing + " " + element)
     if (element == indexing.id) {
       element = indexing.checked;
-      console.log(indexing.checked)
+      debug(indexing.checked)
     }
   })
 })
@@ -186,7 +194,7 @@ const showArrow = (boolean) => {
         element.style.transform = "rotate(0)";
       } else {
         element.style.transform = "rotate(270deg)";
-        console.log("otacim neco?")
+        debug("otacim neco?")
       }
     }
   })
@@ -228,56 +236,56 @@ const attackBtn = document.getElementById("attack");;
 const spawnEnemy = () => {
   let enemies = [
     [{
-      hp: 20 * player.hpMultiple,
+      hp: 20 ,
       name: "Ulrych",
       dmg: 1,
       img: "/res/imgs/characters/ulrychEnemy.png",
       attackSpeed: 750
     }],
     [{
-      hp: 20 * player.hpMultiple,
+      hp: 20 ,
       name: "Evinátor",
       dmg: 1,
       img: "/res/imgs/characters/eva.png",
       attackSpeed: 1000
     }],
     [{
-      hp: 20 * player.hpMultiple,
+      hp: 20,
       name: "Erbi",
       dmg: 1,
       img: "/res/imgs/characters/erbi.png",
       attackSpeed: 1000
     }],
     [{
-      hp: 150 * player.hpMultiple,
+      hp: 150,
       name: "Štepíča",
       dmg: 1,
       img: "/res/imgs/characters/zatimneco.png",
       attackSpeed: 1000
     }],
     [{
-      hp: 150 * player.hpMultiple,
+      hp: 150 ,
       name: "Velkej Negr",
       dmg: 1,
       img: "/res/imgs/characters/zatimneco.png",
       attackSpeed: 1000
     }],
     [{
-      hp: 150 * player.hpMultiple,
+      hp: 150 ,
       name: "Mistr Alkoholik",
       dmg: 1,
       img: "/res/imgs/characters/zatimneco.png",
       attackSpeed: 1000
     }],
     [{
-      hp: 150 * player.hpMultiple,
+      hp: 150,
       name: "Majstr Hudyny",
       dmg: 1,
       img: "/res/imgs/characters/zatimneco.png",
       attackSpeed: 1000
     }],
     [{
-      hp: 150 * player.hpMultiple,
+      hp: 150,
       name: "Majstr Hojnej",
       dmg: 1,
       img: "/res/imgs/characters/zatimneco.png",
@@ -307,16 +315,16 @@ const spawnEnemy = () => {
             spawnEnemy();
             playerDead(false);
             playerWins();
-            console.log("spawnuju nový")
+            debug("spawnuju nový")
             return
           } else if (player.hp == 0 && element.hp > 0) {
             playerDead(true);
-            console.log("Hráč umřel")
+            debug("Hráč umřel")
             return
           }
           element.hp -= player.dmg;
           changeHealthBar(false, element.hp);
-          console.log("Já dáávm damage" + element.hp);
+          debug("Já dáávm damage" + element.hp);
           [...postava].forEach(element => {
             element.style.left = "15%";
             setTimeout(() => {
@@ -330,12 +338,12 @@ const spawnEnemy = () => {
             if (element.hp <= 0) {
               return
             } else if (player.hp == 0 && element.hp > 0) {
-              console.log("Hráč umřel")
+              debug("Hráč umřel")
               return
             } else {
               player.hp -= element.dmg;
               changeHealthBar(true, player.hp);
-              console.log("Dávám damage" + player.hp);
+              debug("Dávám damage" + player.hp);
             }
           }, element.attackSpeed);
         }
@@ -391,7 +399,7 @@ const playerDead = (dead) => {
 
 let save = setInterval(() => {
   savePlayer();
-  console.log("ukládám")
+  debug("ukládám")
 }, 5000);
 
 const gymBtn = document.getElementById("gymBtn");
@@ -415,12 +423,12 @@ const startGym = () => {
   gymProg = 0;
   gymProgBar.value = gymProg;
   gymProgBar.max = 1000;
-  console.log("startnul jsem");
+  debug("startnul jsem");
   gymBtn.onclick = () => {
     if (gymActive == true) {
       gymProg += player.dmg * player.hpMultiple;
       gymProgBar.value = gymProg;
-      console.log("ubírám?");
+      debug("ubírám?");
       if (gymProg >= gymProgBar.max) {
         refreshGym();
         gymProg = 0;
@@ -433,7 +441,7 @@ const startGym = () => {
     if (gymProg >= 0) {
       gymProg -= player.dmg * player.hpMultiple;
       gymProgBar.value = gymProg;
-      console.log("dávám dolu?")
+      debug("dávám dolu?")
     }
   }, 200);
 }
@@ -518,7 +526,7 @@ initUpgrades();
 
 
 const buyUpgrade = (id) => {
-  console.log(player.upgrades);
+  debug(player.upgrades);
   let loop = player.upgrades;
   [...loop].forEach(element => {
     
@@ -529,3 +537,7 @@ const buyUpgrade = (id) => {
 const fetchUpgrades = () => {
   
 }
+
+
+
+
