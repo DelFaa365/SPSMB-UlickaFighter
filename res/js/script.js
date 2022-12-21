@@ -11,7 +11,7 @@ const postava = document.getElementsByClassName("postava");
 
 let debugBoolean = true;
 const debug = (text) => {
-  if(debugBoolean){
+  if (debugBoolean) {
     console.log(text)
   }
 }
@@ -33,7 +33,7 @@ const loadPlayer = () => {
   return data;
 }
 
-const Init = () => {
+const init = () => {
   player = loadPlayer();
 
   if (!player) {
@@ -45,7 +45,10 @@ const Init = () => {
       hp: 10,
       maxHp: 10,
       hpMultiple: 1,
-      upgrades : {},
+      upgrades: [{
+        name: "",
+        ability: "",
+      }],
       charactersOwned: {},
       characterEquiped: "/res/imgs/characters/zatimneco.png",
       options: {
@@ -148,7 +151,7 @@ function typewriter() {
         element.style.display = "none";
         typewriter();
         deletePlayer();
-        Init();
+        init();
         if (element.dataset.index == "start_game") {
           story.style.display = "block";
           setTimeout(() => {
@@ -159,6 +162,11 @@ function typewriter() {
         }
       });
     };
+  } else if(element.id == "buy"){
+    element.onclick = () => {
+        buyUpgrade(element.dataset.index);
+        debug("přidávám")
+      }
   }
 });
 
@@ -228,7 +236,7 @@ const showArrow = (boolean) => {
   });
 });
 
-window.addEventListener("load", Init);
+window.addEventListener("load", init);
 
 
 const enemyBox = document.getElementById("enemy");
@@ -236,14 +244,14 @@ const attackBtn = document.getElementById("attack");;
 const spawnEnemy = () => {
   let enemies = [
     [{
-      hp: 20 ,
+      hp: 20,
       name: "Ulrych",
       dmg: 1,
       img: "/res/imgs/characters/ulrychEnemy.png",
       attackSpeed: 750
     }],
     [{
-      hp: 20 ,
+      hp: 20,
       name: "Evinátor",
       dmg: 1,
       img: "/res/imgs/characters/eva.png",
@@ -264,14 +272,14 @@ const spawnEnemy = () => {
       attackSpeed: 1000
     }],
     [{
-      hp: 150 ,
+      hp: 150,
       name: "Velkej Negr",
       dmg: 1,
       img: "/res/imgs/characters/zatimneco.png",
       attackSpeed: 1000
     }],
     [{
-      hp: 150 ,
+      hp: 150,
       name: "Mistr Alkoholik",
       dmg: 1,
       img: "/res/imgs/characters/zatimneco.png",
@@ -460,7 +468,7 @@ let upgrades = [
     subtitle: "Čistý dým na tvé plíce",
     text: "Zvýší tvojí aktivitu v gymu",
     img: "https://phoenixeliquid.co.uk/wp-content/uploads/2022/01/elf-bar-family.png",
-  }],  
+  }],
   [{
     index: "protein",
     name: "Protein",
@@ -474,7 +482,7 @@ let upgrades = [
     subtitle: "Základ, čistej základ",
     text: "Zvýší rychlost používání náčiní v gymu",
     img: "https://www.dafit.cz/userfiles/26b966d6-0237-4fb0-a78c-090711fb0d89.png",
-  }],  
+  }],
   [{
     index: "zvaro",
     name: "Žváro",
@@ -495,7 +503,6 @@ const initUpgrades = () => {
       const card_text = document.createElement("p");
       const button = document.createElement("button");
 
-
       card.classList.add("card");
       card_body.classList.add("card-body");
       img.classList.add("card-img-top");
@@ -503,12 +510,14 @@ const initUpgrades = () => {
       card_subtitle.classList.add("card-subtitle");
       card_text.classList.add("card-text");
       button.dataset.index = element.index;
+      button.id = "buy";
       button.innerText = "Koupit";
 
       img.src = element.img;
       card_title.innerText = element.name;
       card_subtitle.innerText = element.subtitle;
       card_text.innerText = element.text;
+
 
       card.append(card_body);
       card.append(button);
@@ -526,16 +535,13 @@ initUpgrades();
 
 
 const buyUpgrade = (id) => {
-  debug(player.upgrades);
-  let loop = player.upgrades;
-  [...loop].forEach(element => {
-    
-  });
+  player.upgrades.push(id);
+  debug("kupujuuuu")
 }
 
 
 const fetchUpgrades = () => {
-  
+
 }
 
 
