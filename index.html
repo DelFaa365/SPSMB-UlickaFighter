@@ -73,7 +73,7 @@
 
             <button class="action-left" id="action-left" data-index="goOut"></button>
             <button class="action-right" id="action-right" data-index="goHomeGym"></button>
-            <button class="action-down" id="action-down" data-index="n"></button>
+            <button class="action-down" id="action-down" data-index="goMedic"></button>
             <div class="boxes" data-index="upgrade">
                 <h1>Upgrades</h1>
                 <div class="cards" id="upgrades">
@@ -166,23 +166,31 @@
                 </div>
             </div>
         </section>
-        <section id="goHomeGym" class="page" data-index="goHomeGym"">
-            <div class=" arrow">&#8592;</div>
-    <button class="action-left" id="action-left" data-index="start_game"></button>
-    <button class="action-right" id="action-right" data-index="n"></button>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col">
-                <button id="gymBtn">
-                    Gymovat
-                </button>
-                <progress id="gymProgBar"></progress>
+        <section id="goHomeGym" class="page" data-index="goHomeGym">
+            <div class="arrow">&#8592;</div>
+            <button class="action-left" id="action-left" data-index="start_game"></button>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <button id="gymBtn">Gymovat</button>
+                        <progress id="gymProgBar"></progress>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="postava">
-    </div>
-    </section>
+        </section>
+        <section id="goMedic" class="page" data-index="goMedic">
+            <div class="arrow">&#8592;</div>
+            <button class="action-top" id="action-top" data-index="start_game"></button>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <progress id="healBar" value="0"></progress>
+                        <button id="medicBtn">Heal</button>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 
     <script src="res/js/script.js"></script>

@@ -213,7 +213,8 @@ li>button:hover span:after {
 
 .action-left,
 .action-right,
-.action-down {
+.action-down,
+.action-top {
   position: absolute;
   height: 100%;
   background-color: transparent;
@@ -228,6 +229,13 @@ li>button:hover span:after {
 .action-right {
   top: 0;
   right: 0%;
+}
+
+.action-top {
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 5rem;
 }
 
 .action-down {
@@ -249,6 +257,14 @@ li>button:hover span:after {
 
 #goHomeGym {
   background: url(/res/imgs/homeGym.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#goMedic {
+  background: url(/res/imgs/hospital-blank-exam-room-scene_1308-52818.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -380,7 +396,7 @@ li>button:hover span:after {
 
 
 
-progress {
+#healthPlayer, #healthEnemy {
   position: absolute;
   bottom: 0;
   width: 100%;

@@ -5,6 +5,7 @@ const boxes = document.getElementsByClassName("boxes");
 const actionRight = document.getElementsByClassName("action-right");
 const actionDown = document.getElementsByClassName("action-down");
 const actionLight = document.getElementsByClassName("action-left");
+const actionTop = document.getElementsByClassName("action-top");
 const story = document.getElementById("storyTime");
 const postava = document.getElementsByClassName("postava");
 
@@ -119,7 +120,7 @@ function typewriter() {
         });
       }
     };
-  } else if (element.id == "main_menu" || element.id == "action-left" || element.id == "action-right" || element.id == "action-down") {
+  } else if (element.id == "main_menu" || element.id == "action-left" || element.id == "action-right" || element.id =="action-top" || element.id == "action-down") {
     element.onclick = () => {
       if (player.isNew != true) {
         let index = element.dataset.index;
@@ -195,9 +196,10 @@ const showArrow = (boolean) => {
         element.style.transform = "rotate(180deg)";
       } else if (boolean == 2) {
         element.style.transform = "rotate(0)";
-      } else {
+      } else if (boolean == 3) {
         element.style.transform = "rotate(270deg)";
-        debug("otacim neco?")
+      } else {
+        element.style.transform = "rotate(90deg)"
       }
     }
   })
@@ -228,6 +230,14 @@ const showArrow = (boolean) => {
   });
   element.addEventListener("mouseout", function () {
     showArrow(3);
+  });
+
+});[...actionTop].forEach(element => {
+  element.addEventListener("mouseover", function () {
+    showArrow(4);
+  });
+  element.addEventListener("mouseout", function () {
+    showArrow(4);
   });
 });
 
@@ -267,28 +277,28 @@ const spawnEnemy = () => {
       attackSpeed: 1000
     }],
     [{
-      hp: 150,
+      hp: 350,
       name: "Velkej Negr",
       dmg: 1,
       img: "/res/imgs/characters/zatimneco.png",
       attackSpeed: 1000
     }],
     [{
-      hp: 150,
+      hp: 500,
       name: "Mistr Alkoholik",
       dmg: 1,
       img: "/res/imgs/characters/zatimneco.png",
       attackSpeed: 1000
     }],
     [{
-      hp: 150,
+      hp: 760,
       name: "Majstr Hudyny",
       dmg: 1,
       img: "/res/imgs/characters/zatimneco.png",
       attackSpeed: 1000
     }],
     [{
-      hp: 150,
+      hp: 1000000,
       name: "Majstr Hojnej",
       dmg: 1,
       img: "/res/imgs/characters/zatimneco.png",
@@ -425,7 +435,7 @@ const startGym = () => {
   gymActive = true;
   gymProg = 0;
   gymProgBar.value = gymProg;
-  gymProgBar.max = 1000;
+  gymProgBar.max = 20*player.dmg;
   debug("startnul jsem");
   gymBtn.onclick = () => {
     if (gymActive == true) {
@@ -433,6 +443,7 @@ const startGym = () => {
       gymProgBar.value = gymProg;
       debug("ubírám?");
       if (gymProg >= gymProgBar.max) {
+        player.dmg += player.dmg*0.2
         refreshGym();
         gymProg = 0;
         clearInterval(gymInt);
@@ -505,7 +516,7 @@ const initUpgrades = () => {
       card_subtitle.classList.add("card-subtitle");
       card_text.classList.add("card-text");
       button.dataset.index = element.index;
-      button.id = "buy";
+      button.classList.add("buyUpgrade");
       button.innerText = "Koupit";
 
       img.src = element.img;
@@ -526,13 +537,10 @@ const initUpgrades = () => {
   });
 }
 
-[...button].forEach(element => {
-  console.log(element)
-  if(element.id == "buy"){
-    element.onclick = () => {
-      buyUpgrade(element.dataset.index)
-    }
-  }
+
+const buyUpgradeBtn = document.getElementsByClassName("buyUpgrade");
+[...buyUpgradeBtn].forEach(element => {
+  console.log("kokokokoko")
 });
 
 initUpgrades();
@@ -551,6 +559,21 @@ const fetchUpgrades = () => {
 
 }
 
+const healBar = document.getElementById("healBar");
+[...button].forEach(element => {
+  if(element.id == "medicBtn"){
+    element.onclick = () => {
+      healBar.max = player.maxHp; 
+      healing = setInterval(() => {
+        player.hp += player.maxHp*0.1
+        healBar.value = player.hp
 
+        if(player.hp >= player.maxHp){
+          clearInterval(healing);
+        }
+      }, 1000);
+    }
+  }
+});
 
 
