@@ -162,11 +162,6 @@ function typewriter() {
         }
       });
     };
-  } else if(element.id == "buy"){
-    element.onclick = () => {
-        buyUpgrade(element.dataset.index);
-        debug("přidávám")
-      }
   }
 });
 
@@ -531,11 +526,23 @@ const initUpgrades = () => {
   });
 }
 
+[...button].forEach(element => {
+  console.log(element)
+  if(element.id == "buy"){
+    element.onclick = () => {
+      buyUpgrade(element.dataset.index)
+    }
+  }
+});
+
 initUpgrades();
 
 
 const buyUpgrade = (id) => {
   player.upgrades.push(id);
+  player.upgrades.forEach(element => {
+    debug(element);
+  });
   debug("kupujuuuu")
 }
 
